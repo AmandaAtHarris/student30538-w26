@@ -1003,9 +1003,12 @@ no changes added to commit (use "git add" and/or "git commit -a")
 <section id="roadmap-2" class="slide level2">
 <h2>Roadmap</h2>
 <ul>
-<li>Branching: overview</li>
+<li>Branching
+<ul>
+<li>What is a branch?</li>
 <li>Creating a New Branch</li>
 <li><code>HEAD</code> and Switching Branches</li>
+</ul></li>
 <li>“Undo”</li>
 </ul>
 </section>
@@ -1061,6 +1064,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 </section>
 <section id="undo-conceptual" class="slide level2" style="font-size: 0.7em">
 <h2>Undo conceptual</h2>
+<p>Now that we know about branches, we can learn about the various ways to “undo” our work</p>
 <p>From git for ages 4 and up</p>
 <blockquote>
 <p>Git doesn’t throw things away once committed, you can always get back to where you were before</p>
@@ -1111,7 +1115,6 @@ no changes added to commit (use "git add" and/or "git commit -a")
 </tr>
 </tbody>
 </table>
-<p>Remark: it’s unlikely you will commit (haha) all these scenarios to memory. Instead, use this slide as a helpful reference.</p>
 <aside class="notes">
 <p>Only commits are written so if you change your most recent commit the old work is gone For revert, it adds a new commit on top labeled revert For operations which move <code>HEAD</code>, everything is preserved, you just change where you are checked out</p>
 <style type="text/css">
@@ -1215,9 +1218,10 @@ hint:</code></pre>
 <pre><code>% git merge iss53 --no-ff -m "C6"
 Merge made by the 'ort' strategy.</code></pre>
 
+<!--PG to GGG remove this slide next year-->
 <img data-src="img/merging_4.png" class="r-stretch quarto-figure-center"></section>
-<section id="tips-on-merging" class="slide level2">
-<h2>Tips on merging</h2>
+<section id="tips-on-merging-skip" class="slide level2">
+<h2>Tips on merging (SKIP)</h2>
 <ul>
 <li>We have taught <code>git merge &lt;branch&gt; --ff-only</code> and <code>git merge &lt;branch&gt; --no-ff -m "explain what's been merged"</code>.</li>
 <li>In principle, you can ask git to merge without telling it which type of merge or what is the commit message, but we discourage this. It’s like joining multiple tables without knowing the details of the join (e.g.&nbsp;1:1 or 1:many)!</li>
@@ -1271,6 +1275,14 @@ Merge made by the 'ort' strategy.</code></pre>
 </section>
 <section id="three-way-merge-with-a-conflict-ii" class="slide level2">
 <h2>Three way merge with a conflict II</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/merge_example1.png" style="height:80.0%"></p>
+</figure>
+</div>
+</section>
+<section id="three-way-merge-with-a-conflict-iii" class="slide level2" style="font-size: 0.8em">
+<h2>Three way merge with a conflict III</h2>
 <p><strong>Original Code</strong></p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">'''</span></span>
@@ -1282,36 +1294,40 @@ Merge made by the 'ort' strategy.</code></pre>
 <p><strong>Alternate Versions</strong></p>
 <div class="columns">
 <div class="column" style="width:30%;">
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">'''</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="co">A function that adds x to 4</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co">'''</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="kw">def</span> add(x):</span>
-<span id="cb17-5"><a href="#cb17-5"></a>    <span class="cf">return</span> (x <span class="op">+</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <pre><code>% git switch main</code></pre>
-</div><div class="column" style="width:30%;">
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">'''</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co">A function that adds a list of numbers together</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="co">'''</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">def</span> add(x):</span>
-<span id="cb19-5"><a href="#cb19-5"></a>    <span class="cf">return</span> <span class="bu">sum</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">'''</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co">A function that adds x to 4</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">'''</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">def</span> add(x):</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="cf">return</span> (x <span class="op">+</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div><div class="column" style="width:30%;">
 <pre><code>% git switch iss53</code></pre>
-</div><div class="column" style="width:30%;">
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">'''</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co">A function that adds x to y</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="co">'''</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">def</span> add(x, y):</span>
-<span id="cb21-5"><a href="#cb21-5"></a>    <span class="cf">return</span> (x <span class="op">+</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">'''</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co">A function that adds a list of numbers together</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">'''</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">def</span> add(x):</span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="cf">return</span> <span class="bu">sum</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div><div class="column" style="width:30%;">
 <pre><code>% git switch hotfix</code></pre>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">'''</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co">A function that adds x to y</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co">'''</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="kw">def</span> add(x, y):</span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="cf">return</span> (x <span class="op">+</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 <ul>
-<li>Running <em>git switch</em> command switches to different branches, and each branch contains a different version of <em>add.py</em></li>
+<li><strong>Conflict</strong>: Each branch contains <code>add.py</code> with a different version of the <code>add()</code> function</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Discussion q: hypothetical branch <code>iss_sum</code> takes commit <code>C0</code> and adds a new function starting at line 6 <code>sum()</code>. You switch <code>HEAD</code> to <code>main</code> and run <code>merge iss_sum</code>. Would there be a conflict?</li>
 </ul>
 <!--which has the following commit history:
 
@@ -1324,23 +1340,10 @@ Merge made by the 'ort' strategy.</code></pre>
 | C2   | `iss53`  | Change `add.py` to add a list            | C0      | no        |
 | C3   | `main`   | Change `add.py` to add x to 4            | C0         | no        | -->
 <!-- | C4   | `main`   | Merge `hotfix` into `main`               | C1 \& C3 | yes!      | -->
-</section>
-<section id="three-way-merge-with-a-conflict-ii-1" class="slide level2">
-<h2>Three way merge with a conflict II</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/merge_example1.png" style="height:80.0%"></p>
-</figure>
 </div>
 </section>
-<section id="three-way-merge-with-a-conflict-iii" class="slide level2">
-<h2>Three way merge with a conflict III</h2>
-<ul>
-<li>We will try to merge hotfix into main <img data-src="img/merge_example2.png" style="height:80.0%" data-fig-align="center"></li>
-</ul>
-</section>
-<section id="three-way-merge-with-a-conflict-v" class="slide level2" style="font-size: 0.8em">
-<h2>Three way merge with a conflict V</h2>
+<section id="three-way-merge-with-a-conflict-iv-skip" class="slide level2" style="font-size: 0.8em">
+<h2>Three way merge with a conflict IV (SKIP)</h2>
 <ul>
 <li>Now let’s try to merge <code>main</code> and <code>hotfix</code> together</li>
 <li>Doing so will create a new commit, C4</li>
@@ -1401,13 +1404,13 @@ Merge made by the 'ort' strategy.</code></pre>
 </tbody>
 </table>
 </section>
-<section id="three-way-merge-with-a-conflict-vi" class="slide level2">
-<h2>Three way merge with a conflict VI</h2>
+<section id="three-way-merge-with-a-conflict-v" class="slide level2">
+<h2>Three way merge with a conflict V</h2>
 <pre><code>% git switch main
 % git merge hotfix --no-ff -m "reconcile addition"</code></pre>
 <div class="fragment">
 <ul>
-<li>Because we have different versions of <code>add.py</code> in each branch, merging <code>hotfix</code> into <code>main</code> causes conflicts!</li>
+<li>Because we have different versions of lines 2, 4, and 5 in <code>add.py</code> in each branch, merging <code>hotfix</code> into <code>main</code> causes conflicts!</li>
 <li>Uh oh</li>
 </ul>
 <pre><code>Auto-merging add.py
@@ -1415,14 +1418,15 @@ CONFLICT (content): Merge conflict in add.py
 Automatic merge failed; fix conflicts and then commit the result.</code></pre>
 </div>
 </section>
-<section id="three-way-merge-with-a-conflict-vii" class="slide level2" style="font-size: 0.8em">
-<h2>Three way merge with a conflict VII</h2>
+<section id="three-way-merge-with-a-conflict-vi" class="slide level2" style="font-size: 0.8em">
+<h2>Three way merge with a conflict VI</h2>
 <ul>
 <li>After you type <code>git merge hotfix</code>, git will edit your <code>add.py</code> file and use the following format wherever it finds a conflict:</li>
 </ul>
 
 <img data-src="img/merge_conflicts_1.png" style="width:100.0%" class="r-stretch quarto-figure-center"><div class="fragment">
 <ul>
+<li>Resolve in any text editor manually by deleting incoming or current change</li>
 <li>Resolve within Visual Studio Code by clicking “Accept Current Change” or “Accept Incoming change” or “Accept Both changes”.</li>
 <li>Discussion q: which one to use here?</li>
 </ul>
@@ -1441,8 +1445,8 @@ Automatic merge failed; fix conflicts and then commit the result.</code></pre>
       }</style></aside>
 </div>
 </section>
-<section id="three-way-merge-with-a-conflict-vi-1" class="slide level2">
-<h2>Three way merge with a conflict VI</h2>
+<section id="three-way-merge-with-a-conflict-vii" class="slide level2">
+<h2>Three way merge with a conflict VII</h2>
 <ul>
 <li>In this case, we’ll keep what’s in <code>hotfix</code></li>
 <li>How <code>add.py</code> looks after we’ve clicked “Accept incoming change”: exactly like version in <code>hotfix</code></li>
@@ -1460,28 +1464,28 @@ Automatic merge failed; fix conflicts and then commit the result.</code></pre>
 <li>(Of course, you could have resolved it by “Accepting current change”, which would look exactly like <code>main</code>!)</li>
 </ul>
 </section>
-<section id="three-way-merge-with-a-conflict-vii-1" class="slide level2">
-<h2>Three way merge with a conflict VII</h2>
+<section id="three-way-merge-with-a-conflict-viii" class="slide level2">
+<h2>Three way merge with a conflict VIII</h2>
 <ul>
 <li>After resolving, have to add and then commit the merge</li>
 </ul>
 <pre><code>git add add.py
 git commit -m "C4: resolved conflict between main and hotfix and merged"</code></pre>
 </section>
-<section id="three-way-merge-with-a-conflict-viii-image" class="slide level2">
-<h2>Three way merge with a conflict VIII – image</h2>
+<section id="three-way-merge-with-a-conflict-ix-image" class="slide level2">
+<h2>Three way merge with a conflict IX – image</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/merge_example3.png" style="height:50.0%"></p>
 </figure>
 </div>
 </section>
-<section id="three-way-merge-with-a-conflict-viii-ascii" class="slide level2">
-<h2>Three way merge with a conflict VIII – ascii</h2>
+<section id="three-way-merge-with-a-conflict-x-ascii" class="slide level2">
+<h2>Three way merge with a conflict X – ascii</h2>
 <pre><code>C0 &lt;- C3 &lt;- C4
    \  C1 /
    \  C2</code></pre>
-<p>We are writing the git tree this way since you may need to draw a commit tree on the weekly quiz</p>
+<p>We are writing the git tree this way since you may need to draw a commit tree on the lab assessment</p>
 
 <!-- 
 preserved in case we want to revive it
@@ -1504,7 +1508,10 @@ preserved in case we want to revive it
 <div class="column" style="width:45%;">
 <p>Goal: resolve the conflict between <code>main</code> and <code>iss53</code></p>
 <ol type="1">
-<li>On github.com, fork <code>https://github.com/uchicago-harris-dap/merge_example</code></li>
+<li>On github.com, fork <code>https://github.com/uchicago-harris-dap/merge_example</code>
+<ul>
+<li>Make sure “fork main branch only” is <em>not</em> checked</li>
+</ul></li>
 <li>Clone your fork to local</li>
 <li>By default, only the <code>main</code> branch will get copied to local. Run <code>git switch iss53</code> to also copy this other branch to local.
 <ul>
@@ -1512,7 +1519,7 @@ preserved in case we want to revive it
 </ul></li>
 <li>Move <code>HEAD</code> back to the main branch. Then merge <code>iss53</code> into <code>main</code></li>
 <li>Using VSCode, resolve the conflict in favor of the <code>iss53</code> version</li>
-<li>Commit the merge and name it <code>C5</code></li>
+<li>Commit the merge with the message <code>"C5"</code></li>
 </ol>
 </div>
 </div>
@@ -1708,7 +1715,7 @@ preserved in case we want to revive it
 <li><em>fetch</em> brings changes from remote to local</li>
 <li><em>pull</em> brings changes from remote to local and tries to reconcile via merge commit</li>
 <li><em>pull requests</em> provide a “trial run” of merges that is visible to collaborators</li>
-<li>fork creates a remote copy of a remote repo</li>
+<li><em>fork</em> creates a remote copy of a remote repo</li>
 </ul>
 </section>
 <section id="final-remarks" class="slide level2">
